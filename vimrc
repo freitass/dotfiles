@@ -101,6 +101,7 @@ nnoremap <silent> <F9> :TagbarToggle<CR>
 " Fugitive
 nmap <silent> <leader>gc :Gcommit<CR>
 nmap <silent> <leader>gd :Gdiff<CR>
+nmap <silent> <leader>gp :Git push<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 
 
