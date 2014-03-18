@@ -135,8 +135,12 @@ endif
 
 " Colorscheme
 set background=dark
-let g:solarized_termtrans=0 " Required by iTerm2
-colorscheme rdark
+if has('mac') && !has('gui')
+  let g:solarized_termtrans=0 " Required by iTerm2
+else
+  let g:solarized_termtrans=1
+endif
+colorscheme solarized
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=50                 " keep 50 lines of command line history
