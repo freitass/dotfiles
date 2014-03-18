@@ -47,6 +47,7 @@ NeoBundle 'godlygeek/tabular'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
 " NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'vim-scripts/cscope.vim'
 
 " Required:
 filetype plugin indent on
