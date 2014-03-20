@@ -40,14 +40,20 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'ddollar/nerdcommenter'
 NeoBundle 'Lokaltog/vim-easymotion'
-" NeoBundle 'Valloric/YouCompleteMe', {'build': {'unix': './install.sh --clang-completer'}}
+NeoBundle 'Valloric/YouCompleteMe',
+      \ {
+      \   'build': {
+      \     'unix' : './install.sh --clang-completer',
+      \     'mac'  : './install.sh'
+      \   }
+      \ }
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'freitass/todo.txt-vim'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
 " NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'vim-scripts/cscope.vim'
+" NeoBundle 'vim-scripts/cscope.vim'
 
 " Required:
 filetype plugin indent on
