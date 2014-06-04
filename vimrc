@@ -54,6 +54,7 @@ NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
 " NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'vim-scripts/cscope.vim'
+NeoBundle 'scrooloose/syntastic'
 
 " Required:
 filetype plugin indent on
