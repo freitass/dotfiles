@@ -132,7 +132,8 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Latex file encoding
-autocmd FileType plaintex setlocal fileencoding=utf8
+" autocmd FileType plaintex setlocal fileencoding=utf8
+set encoding=utf-8
 
 " Appearance
 syntax on
