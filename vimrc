@@ -112,6 +112,9 @@ nmap <silent> <leader>gd :Gdiff<CR>
 nmap <silent> <leader>gp :Git push<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 
+" YouCompleteMe
+let g:clang_library_path = '/home/likewise-open/CERTI/llf/.vim/bundle/YouCompleteMe/third_party/ycmd'
+let g:clang_use_library=1
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
