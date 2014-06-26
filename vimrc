@@ -29,13 +29,20 @@ endif
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc.vim', {'build': {'unix': g:make}}
-NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/vimproc.vim',
+      \ {
+      \   'build': {
+      \     'mac'  : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \   },
+      \ }
+" NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/wildfire.vim'
 " NeoBundle 'Shougo/neocomplete'
 " NeoBundle 'Shougo/neomru.vim'
 " NeoBundle 'Shougo/neosnippet-snippets'
 " NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'hewes/unite-gtags'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'ddollar/nerdcommenter'
@@ -44,7 +51,7 @@ NeoBundle 'Valloric/YouCompleteMe',
       \ {
       \   'build': {
       \     'unix' : './install.sh --clang-completer',
-      \     'mac'  : './install.sh'
+      \     'mac'  : './install.sh --clang-completer'
       \   }
       \ }
 NeoBundle 'flazz/vim-colorschemes'
@@ -54,7 +61,10 @@ NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
 " NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'vim-scripts/cscope.vim'
-NeoBundle 'scrooloose/syntastic'
+" NeoBundle 'scrooloose/syntastic'
+NeoBundle 'kana/vim-operator-user'
+NeoBundle 'rhysd/vim-clang-format'
+NeoBundle 'vim-scripts/a.vim'
 
 " Required:
 filetype plugin indent on
@@ -76,11 +86,58 @@ let g:ctrlp_working_path_mode = ''  " working path won't change when opening new
 let g:ctrlp_switch_buffer = 'Et'    " jump to opened window (if any)
 
 " Unite
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>r :<C-u>Unite -start-insert file_rec/async:!<CR>
+nnoremap [unite] <Nop>
+nmap <space> [unite]
 
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#custom#profile('default', 'smartcase', 1)
+" Start insert mode in unite-action buffer.
+call unite#custom#profile('action', 'context', {
+      \   'start_insert' : 1
+      \ })
+
+nnoremap [unite]f :<C-u>Unite -start-insert file_rec/async:!<CR>
+
+
+" Unite: unite-source-history/yank
 let g:unite_source_history_yank_enable = 1
-nnoremap <leader>y :<C-u>Unite history/yank<CR>
+nnoremap [unite]y :<C-u>Unite history/yank<CR>
+
+" Unite: unite-source-grep
+let g:unite_source_grep_max_candidates = 200
+if executable('ag')
+  " Use ag in unite grep source.
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+        \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+        \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('pt')
+  " Use pt in unite grep source.
+  " https://github.com/monochromegane/the_platinum_searcher
+  let g:unite_source_grep_command = 'pt'
+  let g:unite_source_grep_default_opts = '-i --nogroup --nocolor'
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('ack-grep')
+  " Use ack in unite grep source.
+  let g:unite_source_grep_command = 'ack-grep'
+  let g:unite_source_grep_default_opts =
+        \ '-i --no-heading --no-color -k -H'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+nnoremap [unite]ug :<C-u>Unite grep:.:-iR:<CR>
+
+" Unite-gtags
+let g:unite_source_gtags_project_config = {
+      \ '_': { 'treelize': 1 }
+      \ }
+" specify your project path as key.
+" '_' in key means default configuration.
+nnoremap [unite]gx :<C-u>Unite gtags/context<CR>
+nnoremap [unite]gr :<C-u>Unite gtags/ref<CR>
+nnoremap [unite]gd :<C-u>Unite gtags/def<CR>
+nnoremap [unite]gg :<C-u>Unite gtags/grep<CR>
+nnoremap [unite]gc :<C-u>Unite gtags/conpletion<CR>
 
 " NERDCommenter
 " Map <C-/> to toggle comment both in normal and visual mode
@@ -116,6 +173,25 @@ nmap <silent> <leader>gs :Gstatus<CR>
 let g:clang_library_path = '/home/likewise-open/CERTI/llf/.vim/bundle/YouCompleteMe/third_party/ycmd'
 let g:clang_use_library=1
 
+" clang-format
+" style_options: http://clang.llvm.org/docs/ClangFormatStyleOptions.html
+" let g:clang_format#style_options = {
+"   \ "AccessModifierOffset" : -4,
+"   \ "AllowShortIfStatementsOnASingleLine" : "true",
+"   \ "AlwaysBreakTemplateDeclarations" : "true",
+"   \ "Standard" : "C++11"}
+
+let g:clang_format#command = "clang-format-3.5"
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+" if you install vim-operator-user
+autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+
+" a.vim
+map <C-Tab> :A<CR>
+
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
@@ -136,7 +212,9 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Latex file encoding
 " autocmd FileType plaintex setlocal fileencoding=utf8
-set encoding=utf-8
+
+" File encoding
+set encoding=utf8
 
 " Appearance
 syntax on
@@ -146,13 +224,21 @@ if has("gui_macvim")
 endif
 
 " Colorscheme
-set background=dark
-if has('mac') && !has('gui')
-  let g:solarized_termtrans=0 " Required by iTerm2
-else
-  let g:solarized_termtrans=1
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
 endif
-colorscheme solarized
+
+set background=dark
+if has('mac')
+  if !has('gui')
+    let g:solarized_termtrans=0 " Required by iTerm2
+  else
+    let g:solarized_termtrans=1
+  endif
+  colorscheme solarized
+else
+  colorscheme advantage
+endif
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=50                 " keep 50 lines of command line history
@@ -162,7 +248,7 @@ set incsearch                  " do incremental searching
 set nobackup                   " Disable the creation of backup files (the ones ending with ~)
 set mouse=a                    " enable mouse 'all'
 set number                     " line numbers
-set scrolloff=4                " Keep the cursor away from top/bottom
+set scrolloff=1                " Keep the cursor away from top/bottom
 set wildmode=longest,list      " TAB completion (such as bash)
 set laststatus=2               " Always show a status bar
 set smartcase                  " Ignore case when search pattern is all lowercase
