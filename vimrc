@@ -40,8 +40,8 @@ NeoBundle 'Shougo/vimproc.vim',
 NeoBundle 'Shougo/wildfire.vim'
 " NeoBundle 'Shougo/neocomplete'
 " NeoBundle 'Shougo/neomru.vim'
-" NeoBundle 'Shougo/neosnippet-snippets'
 " NeoBundle 'Shougo/neosnippet.vim'
+" NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'hewes/unite-gtags'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'scrooloose/nerdtree'
@@ -172,6 +172,7 @@ nmap <silent> <leader>gs :Gstatus<CR>
 " YouCompleteMe
 let g:clang_library_path = '/home/likewise-open/CERTI/llf/.vim/bundle/YouCompleteMe/third_party/ycmd'
 let g:clang_use_library=1
+let g:ycm_extra_conf_globlist = ['~/ProjectsRemote/*','!~/*']
 
 " clang-format
 " style_options: http://clang.llvm.org/docs/ClangFormatStyleOptions.html
@@ -190,7 +191,7 @@ autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 
 " a.vim
-map <C-Tab> :A<CR>
+map <silent> <C-Tab> :A<CR>
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -218,7 +219,7 @@ set encoding=utf8
 
 " Appearance
 syntax on
-set hlsearch
+set nohlsearch
 if has("gui_macvim")
   set guifont=Menlo:h12
 endif
