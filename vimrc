@@ -164,6 +164,7 @@ let g:tagbar_autofocus = 1  " Change the focus to the Tagbar window whenever it 
 nnoremap <silent> <F9> :TagbarToggle<CR>
 
 " Fugitive
+set diffopt=filler,vertical
 nmap <silent> <leader>gc :Gcommit<CR>
 nmap <silent> <leader>gd :Gdiff<CR>
 nmap <silent> <leader>gp :Git push<CR>
