@@ -137,7 +137,7 @@ nnoremap [unite]gx :<C-u>Unite gtags/context<CR>
 nnoremap [unite]gr :<C-u>Unite gtags/ref<CR>
 nnoremap [unite]gd :<C-u>Unite gtags/def<CR>
 nnoremap [unite]gg :<C-u>Unite gtags/grep<CR>
-nnoremap [unite]gc :<C-u>Unite gtags/conpletion<CR>
+nnoremap [unite]gc :<C-u>Unite gtags/completion<CR>
 
 " NERDCommenter
 " Map <C-/> to toggle comment both in normal and visual mode
@@ -176,13 +176,13 @@ let g:ycm_extra_conf_globlist = ['~/ProjectsRemote/*','!~/*']
 
 " clang-format
 " style_options: http://clang.llvm.org/docs/ClangFormatStyleOptions.html
-" let g:clang_format#style_options = {
-"   \ "AccessModifierOffset" : -4,
-"   \ "AllowShortIfStatementsOnASingleLine" : "true",
-"   \ "AlwaysBreakTemplateDeclarations" : "true",
-"   \ "Standard" : "C++11"}
-
 let g:clang_format#command = "clang-format-3.5"
+let g:clang_format#code_style = "google"
+let g:clang_format#style_options = {
+  \ "AccessModifierOffset" : -4,
+  \ "AlwaysBreakTemplateDeclarations" : "true",
+  \ "Standard" : "C++03"}
+" \ "SpaceAfterCStyleCast" : "true",
 
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
