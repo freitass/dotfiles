@@ -14,7 +14,7 @@ if has('vim_starting')
 endif
 
 " Required:
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -37,7 +37,6 @@ NeoBundle 'Shougo/vimproc.vim',
       \   },
       \ }
 " NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'Shougo/wildfire.vim'
 " NeoBundle 'Shougo/neocomplete'
 " NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/neosnippet.vim'
@@ -65,6 +64,9 @@ NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'rhysd/vim-clang-format'
 NeoBundle 'vim-scripts/a.vim'
+NeoBundle 'gcmt/wildfire.vim'
+
+call neobundle#end()
 
 " Required:
 filetype plugin indent on
@@ -99,10 +101,10 @@ nnoremap [unite] <Nop>
 nmap <space> [unite]
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#custom#profile('default', 'smartcase', 1)
 " Start insert mode in unite-action buffer.
 call unite#custom#profile('action', 'context', {
-      \   'start_insert' : 1
+      \   'start_insert' : 1,
+      \   'smartcase' : 1
       \ })
 
 nnoremap [unite]f :<C-u>Unite -start-insert file_rec/async:!<CR>
@@ -140,9 +142,9 @@ endif
 nnoremap [unite]ug :<C-u>Unite grep:.:-iIR:<CR>
 
 " Unite-gtags
-let g:unite_source_gtags_project_config = {
-      \ '_': { 'treelize': 1 }
-      \ }
+" let g:unite_source_gtags_project_config = {
+"       \ '_': { 'treelize': 1 }
+"       \ }
 " specify your project path as key.
 " '_' in key means default configuration.
 nnoremap [unite]gx :<C-u>Unite gtags/context<CR>
@@ -183,9 +185,9 @@ nmap <silent> <leader>gp :Git push<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 
 " YouCompleteMe
-let g:clang_library_path = '/home/likewise-open/CERTI/llf/.vim/bundle/YouCompleteMe/third_party/ycmd'
-let g:clang_use_library=1
-let g:ycm_extra_conf_globlist = ['~/ProjectsRemote/*','!~/*']
+" let g:clang_library_path = '/home/likewise-open/CERTI/llf/.vim/bundle/YouCompleteMe/third_party/ycmd'
+" let g:clang_use_library=1
+" let g:ycm_extra_conf_globlist = ['~/ProjectsRemote/*','!~/*']
 
 " clang-format
 " style_options: http://clang.llvm.org/docs/ClangFormatStyleOptions.html
