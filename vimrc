@@ -81,6 +81,15 @@ let mapleader = ","
 " Window configurations:
 " 	position:bottom
 " 	order (of results):top to bottom (ttb)
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+        \ --ignore .git
+        \ --ignore .svn
+        \ --ignore .hg
+        \ --ignore .DS_Store
+        \ --ignore "**/*.pyc"
+        \ -g ""'
+endif
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_working_path_mode = ''  " working path won't change when opening new files
 let g:ctrlp_switch_buffer = 'Et'    " jump to opened window (if any)
@@ -128,7 +137,7 @@ elseif executable('ack-grep')
         \ '-i --no-heading --no-color -k -H'
   let g:unite_source_grep_recursive_opt = ''
 endif
-nnoremap [unite]ug :<C-u>Unite grep:.:-iR:<CR>
+nnoremap [unite]ug :<C-u>Unite grep:.:-iIR:<CR>
 
 " Unite-gtags
 let g:unite_source_gtags_project_config = {
