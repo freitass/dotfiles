@@ -65,6 +65,7 @@ NeoBundle 'kana/vim-operator-user'
 NeoBundle 'rhysd/vim-clang-format'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'gcmt/wildfire.vim'
+NeoBundle 'FelikZ/ctrlp-py-matcher'
 
 call neobundle#end()
 
@@ -123,6 +124,7 @@ let mapleader = ","
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_working_path_mode = ''  " working path won't change when opening new files
 let g:ctrlp_switch_buffer = 'Et'    " jump to opened window (if any)
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Unite
 nnoremap [unite] <Nop>
@@ -166,6 +168,8 @@ elseif executable('ack-grep')
   let g:unite_source_grep_default_opts =
         \ '-i --no-heading --no-color -k -H'
   let g:unite_source_grep_recursive_opt = ''
+else
+  let g:unite_source_grep_recursive_opt = '--exclude-dir=.svn'
 endif
 nnoremap [unite]ug :<C-u>Unite grep:.:-iIR:<CR>
 
@@ -390,7 +394,7 @@ if has('mac')
   endif
   colorscheme solarized
 else
-  colorscheme advantage
+  colorscheme pyte
 endif
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -410,4 +414,12 @@ set softtabstop=2              " # of spaces of <TAB> key
 set tabstop=2                  " # of spaces erased when deleting a <TAB>
 set expandtab                  " Insert spaces instead of tabs
 set smarttab                   " 'siftwidth' in front of a line
+
+set exrc   " enable per-directory .vimrc files
+set secure " disable unsafe commands in local .vimrc files
+
+" add list lcs=tab:>-,trail:x for tab/trailing space visuals
+set list
+set lcs=tab:>-,trail:x
+autocmd BufEnter ?akefile* set noet ts=8 sw=8 nocindent
 
