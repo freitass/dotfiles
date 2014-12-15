@@ -29,12 +29,14 @@ endif
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc.vim',
-      \ {
-      \   'build': {
-      \     'mac'  : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \   },
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'windows' : 'tools\\update-dll-mingw',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'linux' : 'make',
+      \     'unix' : 'gmake',
+      \    },
       \ }
 " NeoBundle 'Shougo/vimshell.vim'
 " NeoBundle 'Shougo/neocomplete'
@@ -46,17 +48,12 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'ddollar/nerdcommenter'
 NeoBundle 'Lokaltog/vim-easymotion'
-" NeoBundle 'Valloric/YouCompleteMe',
-"       \ {
-"       \   'build': {
-"       \     'unix' : './install.sh --clang-completer',
-"       \     'mac'  : './install.sh --clang-completer'
-"       \   }
-"       \ }
+" NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'freitass/todo.txt-vim'
 NeoBundle 'godlygeek/tabular'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'FelikZ/ctrlp-py-matcher'
 NeoBundle 'terryma/vim-multiple-cursors'
 " NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'vim-scripts/cscope.vim'
@@ -65,7 +62,6 @@ NeoBundle 'kana/vim-operator-user'
 NeoBundle 'rhysd/vim-clang-format'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'gcmt/wildfire.vim'
-NeoBundle 'FelikZ/ctrlp-py-matcher'
 
 call neobundle#end()
 
