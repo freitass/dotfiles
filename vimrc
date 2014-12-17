@@ -48,7 +48,7 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'ddollar/nerdcommenter'
 NeoBundle 'Lokaltog/vim-easymotion'
-" NeoBundle 'Valloric/YouCompleteMe'
+NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'freitass/todo.txt-vim'
 NeoBundle 'godlygeek/tabular'
@@ -62,6 +62,7 @@ NeoBundle 'kana/vim-operator-user'
 NeoBundle 'rhysd/vim-clang-format'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'gcmt/wildfire.vim'
+NeoBundle 'Raimondi/delimitMate'
 
 call neobundle#end()
 
@@ -216,6 +217,8 @@ nmap <silent> <leader>gs :Gstatus<CR>
 " let g:clang_library_path = '/home/likewise-open/CERTI/llf/.vim/bundle/YouCompleteMe/third_party/ycmd'
 " let g:clang_use_library=1
 " let g:ycm_extra_conf_globlist = ['~/ProjectsRemote/*','!~/*']
+let g:ycm_autoclose_preview_window_after_completion = 1
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 " clang-format
 " style_options: http://clang.llvm.org/docs/ClangFormatStyleOptions.html
@@ -329,6 +332,11 @@ autocmd BufReadPost *
 " " For perlomni.vim setting.
 " " https://github.com/c9s/perlomni.vim
 " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+
+" delimitMate
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
 
 
 " neosnippet
