@@ -63,6 +63,7 @@ NeoBundle 'rhysd/vim-clang-format'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'cream-showinvisibles'
 
 call neobundle#end()
 
@@ -122,6 +123,7 @@ let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_working_path_mode = ''  " working path won't change when opening new files
 let g:ctrlp_switch_buffer = 'Et'    " jump to opened window (if any)
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_follow_symlinks = 1
 
 " Unite
 nnoremap [unite] <Nop>
@@ -146,29 +148,30 @@ nnoremap [unite]s :<C-u>Unite neosnippet<CR>
 
 " Unite: unite-source-grep
 let g:unite_source_grep_max_candidates = 200
-if executable('ag')
-  " Use ag in unite grep source.
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-        \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-        \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-  let g:unite_source_grep_recursive_opt = ''
-elseif executable('pt')
-  " Use pt in unite grep source.
-  " https://github.com/monochromegane/the_platinum_searcher
-  let g:unite_source_grep_command = 'pt'
-  let g:unite_source_grep_default_opts = '-i --nogroup --nocolor'
-  let g:unite_source_grep_recursive_opt = ''
-elseif executable('ack-grep')
+" if executable('ag')
+"   " Use ag in unite grep source.
+"   let g:unite_source_grep_command = 'ag'
+"   let g:unite_source_grep_default_opts =
+"         \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+"         \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+"   let g:unite_source_grep_recursive_opt = ''
+" elseif executable('pt')
+"   " Use pt in unite grep source.
+"   " https://github.com/monochromegane/the_platinum_searcher
+"   let g:unite_source_grep_command = 'pt'
+"   let g:unite_source_grep_default_opts = '-i --nogroup --nocolor'
+"   let g:unite_source_grep_recursive_opt = ''
+" elseif executable('ack-grep')
+if executable('ack-grep')
   " Use ack in unite grep source.
   let g:unite_source_grep_command = 'ack-grep'
   let g:unite_source_grep_default_opts =
-        \ '-i --no-heading --no-color -k -H'
+        \ '--no-heading --no-color -k -H --sort-files'
   let g:unite_source_grep_recursive_opt = ''
 else
-  let g:unite_source_grep_recursive_opt = '--exclude-dir=.svn'
+  let g:unite_source_grep_default_opts = '--exclude-dir=.svn -iIR'
 endif
-nnoremap [unite]ug :<C-u>Unite grep:.:-iIR:<CR>
+nnoremap [unite]ug :<C-u>Unite grep:.::<CR>
 
 " Unite-gtags
 " let g:unite_source_gtags_project_config = {
@@ -214,10 +217,8 @@ nmap <silent> <leader>gp :Git push<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 
 " YouCompleteMe
-" let g:clang_library_path = '/home/likewise-open/CERTI/llf/.vim/bundle/YouCompleteMe/third_party/ycmd'
-" let g:clang_use_library=1
-" let g:ycm_extra_conf_globlist = ['~/ProjectsRemote/*','!~/*']
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 " clang-format
@@ -337,6 +338,7 @@ autocmd BufReadPost *
 " delimitMate
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
+imap <C-L> <Plug>delimitMateS-Tab
 
 
 " neosnippet
@@ -398,7 +400,7 @@ if has('mac')
   endif
   colorscheme solarized
 else
-  colorscheme pyte
+  colorscheme solarized
 endif
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -423,7 +425,7 @@ set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
 
 " add list lcs=tab:>-,trail:x for tab/trailing space visuals
-set list
-set lcs=tab:>-,trail:x
+" set list
+" set lcs=tab:>-,trail:x
 autocmd BufEnter ?akefile* set noet ts=8 sw=8 nocindent
 
