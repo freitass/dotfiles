@@ -66,3 +66,4 @@ run_scripts()
 }
 
 run_scripts ~/.bashrc.d
+run_scripts ~/.bash_aliases.d
