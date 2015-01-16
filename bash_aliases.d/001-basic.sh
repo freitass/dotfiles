@@ -61,7 +61,8 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 
 # Network
 function DiscoverMyIP() {
-local interface=(`ifconfig -s | grep -o eth[0-9]`)
+local interface
+interface=(`ifconfig -s | grep -o eth[0-9]`)
 [ ${#interface[@]} -ne "1" ] && {
 echo "[$FUNCNAME] ERROR: Cannot discover IP address"
 return 1
