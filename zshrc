@@ -51,6 +51,9 @@ plugins=(common-aliases dirhistory sudo)
 
 setopt no_share_history
 
+# Prevents ZSH from printing an error when wildcards are used
+unsetopt nomatch
+
 source $ZSH/oh-my-zsh.sh
 
 # hook to load files separated by contexts
