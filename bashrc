@@ -133,8 +133,12 @@ run_scripts()
     #skip non-executable snippets
     [ -x "$script"  ] || continue
 
+    echo -n "processing '`basename $script`'... "
+
     # execute $script in the context of the current shell
     . $script
+
+    echo "done."
   done
 }
 
