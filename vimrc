@@ -421,6 +421,7 @@ set softtabstop=2              " # of spaces of <TAB> key
 set tabstop=2                  " # of spaces erased when deleting a <TAB>
 set expandtab                  " Insert spaces instead of tabs
 set smarttab                   " 'siftwidth' in front of a line
+set clipboard=unnamedplus      " for simplified clipboard copy/paste
 
 set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
