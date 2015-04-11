@@ -64,6 +64,7 @@ NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'cream-showinvisibles'
+NeoBundle 'h1mesuke/vim-unittest'
 
 call neobundle#end()
 
