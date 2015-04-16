@@ -209,6 +209,7 @@ let g:tagbar_sort      = 0  " Display tags the same order they appear in the sou
 let g:tagbar_width     = 30 " Set Tagbar window width to 30
 let g:tagbar_autofocus = 1  " Change the focus to the Tagbar window whenever it is opened
 nnoremap <silent> <F9> :TagbarToggle<CR>
+nnoremap <silent> <leader>o :TagbarToggle<CR>
 
 " Fugitive
 set diffopt=filler,vertical
@@ -404,24 +405,24 @@ else
   colorscheme solarized
 endif
 
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set history=50                 " keep 50 lines of command line history
-set ruler                      " show the cursor position all the time
-set showcmd                    " display incomplete commands
-set incsearch                  " do incremental searching
-set nobackup                   " Disable the creation of backup files (the ones ending with ~)
-set mouse=a                    " enable mouse 'all'
-set number                     " line numbers
-set scrolloff=1                " Keep the cursor away from top/bottom
-set wildmode=longest,list      " TAB completion (such as bash)
-set laststatus=2               " Always show a status bar
-set smartcase                  " Ignore case when search pattern is all lowercase
-set shiftwidth=2               " # of spaces of auto indent
-set softtabstop=2              " # of spaces of <TAB> key
-set tabstop=2                  " # of spaces erased when deleting a <TAB>
-set expandtab                  " Insert spaces instead of tabs
-set smarttab                   " 'siftwidth' in front of a line
-set clipboard=unnamedplus      " for simplified clipboard copy/paste
+set backspace=indent,eol,start    " allow backspacing over everything in insert mode
+set history=50                    " keep 50 lines of command line history
+set ruler                         " show the cursor position all the time
+set showcmd                       " display incomplete commands
+set incsearch                     " do incremental searching
+set nobackup                      " Disable the creation of backup files (the ones ending with ~)
+set mouse=a                       " enable mouse 'all'
+set number                        " line numbers
+set scrolloff=1                   " Keep the cursor away from top/bottom
+set wildmode=longest,list         " TAB completion (such as bash)
+set laststatus=2                  " Always show a status bar
+set smartcase                     " Ignore case when search pattern is all lowercase
+set shiftwidth=2                  " # of spaces of auto indent
+set softtabstop=2                 " # of spaces of <TAB> key
+set tabstop=2                     " # of spaces erased when deleting a <TAB>
+set expandtab                     " Insert spaces instead of tabs
+set smarttab                      " 'siftwidth' in front of a line
+set clipboard=unnamed,unnamedplus " for simplified clipboard copy/paste
 
 set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
