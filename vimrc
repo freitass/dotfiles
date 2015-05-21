@@ -55,7 +55,7 @@ NeoBundle 'godlygeek/tabular'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'FelikZ/ctrlp-py-matcher'
 NeoBundle 'terryma/vim-multiple-cursors'
-" NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'vim-scripts/cscope.vim'
 " NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kana/vim-operator-user'
@@ -65,6 +65,7 @@ NeoBundle 'gcmt/wildfire.vim'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'cream-showinvisibles'
 NeoBundle 'h1mesuke/vim-unittest'
+NeoBundle 'vim-scripts/AnsiEsc.vim'
 
 call neobundle#end()
 
@@ -402,7 +403,7 @@ if has('mac')
   endif
   colorscheme solarized
 else
-  colorscheme solarized
+  colorscheme tango-desert
 endif
 
 set backspace=indent,eol,start    " allow backspacing over everything in insert mode
