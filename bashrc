@@ -1,4 +1,4 @@
-##!/bin/bash
+#!/bin/bash
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -133,10 +133,10 @@ run_scripts()
     #skip non-executable snippets
     [ -x "$script"  ] || continue
 
-    echo -n "processing '`basename $script`'... "
+    echo -n "processing '$(basename "$script")'... "
 
     # execute $script in the context of the current shell
-    . $script
+    source "$script"
 
     echo "done."
   done

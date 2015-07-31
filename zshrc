@@ -49,25 +49,24 @@ plugins=(common-aliases dirhistory sudo)
 
 # User configuration
 
-setopt no_share_history
-
-# Prevents ZSH from printing an error when wildcards are used
+# Prevents ZSH from printing an error when wildcards are used.
 unsetopt nomatch
 
 source $ZSH/oh-my-zsh.sh
 
-# hook to load files separated by contexts
+# This must be set after sourcing the oh-my-zsh.sh file (the share_history
+# option can be set on that script).
+setopt no_share_history
+
+# Hook to load files separated by contexts.
 run_scripts()
 {
   for script in $1/*; do
-    #skip non-executable snippets
+    # Skip non-executable snippets.
     [ -x "$script"  ] || continue
 
-    echo -n "processing '`basename $script`'... "
-
-    # execute $script in the context of the current shell
-    . $script
-
+    echo -n "processing '$(basename "$script")'... "
+    source "$script"
     echo "done."
   done
 }
