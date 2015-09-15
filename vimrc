@@ -417,7 +417,7 @@ set number                        " line numbers
 set scrolloff=1                   " Keep the cursor away from top/bottom
 set wildmode=longest,list         " TAB completion (such as bash)
 set laststatus=2                  " Always show a status bar
-set smartcase                     " Ignore case when search pattern is all lowercase
+set ignorecase smartcase          " Ignore case when search pattern is all lowercase
 set shiftwidth=2                  " # of spaces of auto indent
 set softtabstop=2                 " # of spaces of <TAB> key
 set tabstop=2                     " # of spaces erased when deleting a <TAB>
