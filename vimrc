@@ -28,6 +28,7 @@ endif
 " My Bundles here:
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc.vim', {
       \ 'build' : {
@@ -164,11 +165,15 @@ let g:unite_source_grep_max_candidates = 200
 "   let g:unite_source_grep_default_opts = '-i --nogroup --nocolor'
 "   let g:unite_source_grep_recursive_opt = ''
 " elseif executable('ack-grep')
-if executable('ack-grep')
+if executable('ack') || executable('ack-grep')
   " Use ack in unite grep source.
-  let g:unite_source_grep_command = 'ack-grep'
+  let s:grep_command = 'ack-grep'
+  if executable('ack')
+    let s:grep_command = 'ack'
+  endif
+  let g:unite_source_grep_command = s:grep_command
   let g:unite_source_grep_default_opts =
-        \ '--no-heading --no-color -k -H --sort-files'
+        \ '--no-heading --no-color -k -H --sort-files --smart-case'
   let g:unite_source_grep_recursive_opt = ''
 else
   let g:unite_source_grep_default_opts = '--exclude-dir=.svn -iIR'
@@ -433,3 +438,8 @@ set secure " disable unsafe commands in local .vimrc files
 " set lcs=tab:>-,trail:x
 autocmd BufEnter ?akefile* set noet ts=8 sw=8 nocindent
 
+" Coming Home To Vim
+inoremap jk <Esc>
+
+" Start external command with a single bang
+nnoremap ! :!
