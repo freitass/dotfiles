@@ -49,7 +49,7 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'ddollar/nerdcommenter'
 NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'Valloric/YouCompleteMe'
+" NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'freitass/todo.txt-vim'
 NeoBundle 'godlygeek/tabular'
@@ -196,6 +196,8 @@ nnoremap [unite]gc :<C-u>Unite gtags/completion<CR>
 " Map <C-/> to toggle comment both in normal and visual mode
 nmap  <plug>NERDCommenterToggle
 vmap  <plug>NERDCommenterToggle
+nmap <leader>/ <plug>NERDCommenterToggle
+vmap <leader>/ <plug>NERDCommenterToggle
 
 " Tabularize
 nmap <silent> <leader>a= :<C-u>Tabularize /=<CR>
@@ -209,13 +211,14 @@ vmap <silent> <leader>a, :<C-u>Tabularize /,<CR>
 
 " NERDTree
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
+nnoremap <silent> <leader>a :NERDTreeToggle<CR>
 
 " Tagbar
 let g:tagbar_sort      = 0  " Display tags the same order they appear in the source file
 let g:tagbar_width     = 30 " Set Tagbar window width to 30
 let g:tagbar_autofocus = 1  " Change the focus to the Tagbar window whenever it is opened
 nnoremap <silent> <F9> :TagbarToggle<CR>
-nnoremap <silent> <leader>o :TagbarToggle<CR>
+nnoremap <silent> <leader>f :TagbarToggle<CR>
 
 " Fugitive
 set diffopt=filler,vertical

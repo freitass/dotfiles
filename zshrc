@@ -58,6 +58,10 @@ source $ZSH/oh-my-zsh.sh
 # option can be set on that script).
 setopt no_share_history
 
+unalias run-help
+autoload run-help
+HELPDIR=/usr/local/share/zsh/help
+
 # Hook to load files separated by contexts.
 run_scripts()
 {
