@@ -1,24 +1,11 @@
-" Fetch NeoBundle if not available
-let neoBundleReadMe=expand('~/.vim/bundle/neobundle.vim/README.md')
-if !filereadable(neoBundleReadMe)
-  echo "Installing NeoBundle...\n"
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+set nocompatible  " Be iMproved
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-if has('vim_starting')
-  set nocompatible               " Be iMproved
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+call plug#begin(expand('~/.vim/bundle/'))
 
 let g:make = 'gmake'
 if system('uname -o') =~ '^GNU/'
@@ -26,56 +13,52 @@ if system('uname -o') =~ '^GNU/'
 endif
 
 " My Bundles here:
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'linux' : 'make',
-      \     'unix' : 'gmake',
-      \    },
-      \ }
-" NeoBundle 'Shougo/vimshell.vim'
-" NeoBundle 'Shougo/neocomplete'
-" NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'hewes/unite-gtags'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'ddollar/nerdcommenter'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'freitass/todo.txt-vim'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'FelikZ/ctrlp-py-matcher'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'altercation/vim-colors-solarized'
-" NeoBundle 'vim-scripts/cscope.vim'
-" NeoBundle 'scrooloose/syntastic'
-NeoBundle 'kana/vim-operator-user'
-NeoBundle 'rhysd/vim-clang-format'
-NeoBundle 'vim-scripts/a.vim'
-NeoBundle 'gcmt/wildfire.vim'
-NeoBundle 'Raimondi/delimitMate'
-NeoBundle 'cream-showinvisibles'
-NeoBundle 'h1mesuke/vim-unittest'
-NeoBundle 'vim-scripts/AnsiEsc.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'Shougo/unite.vim'
+" NeoBundle 'Shougo/vimproc.vim', {
+"       \ 'build' : {
+"       \     'windows' : 'tools\\update-dll-mingw',
+"       \     'cygwin' : 'make -f make_cygwin.mak',
+"       \     'mac' : 'make -f make_mac.mak',
+"       \     'linux' : 'make',
+"       \     'unix' : 'gmake',
+"       \    },
+"       \ }
+" Plug 'Shougo/vimshell.vim'
+" Plug 'Shougo/neocomplete'
+" Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'hewes/unite-gtags'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+Plug 'ddollar/nerdcommenter'
+Plug 'Lokaltog/vim-easymotion'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'flazz/vim-colorschemes'
+Plug 'freitass/todo.txt-vim'
+Plug 'godlygeek/tabular'
+Plug 'kien/ctrlp.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'altercation/vim-colors-solarized'
+" Plug 'vim-scripts/cscope.vim'
+" Plug 'scrooloose/syntastic'
+Plug 'kana/vim-operator-user'
+Plug 'rhysd/vim-clang-format'
+Plug 'vim-scripts/a.vim'
+Plug 'gcmt/wildfire.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'cream-showinvisibles'
+Plug 'h1mesuke/vim-unittest'
+Plug 'vim-scripts/AnsiEsc.vim'
 
-call neobundle#end()
+call plug#end()
 
 " Required:
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
 
 
 let mapleader = ","
