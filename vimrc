@@ -54,6 +54,8 @@ Plug 'Raimondi/delimitMate'
 Plug 'cream-showinvisibles'
 Plug 'h1mesuke/vim-unittest'
 Plug 'vim-scripts/AnsiEsc.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
