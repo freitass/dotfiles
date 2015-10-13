@@ -16,21 +16,13 @@ endif
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'Shougo/unite.vim'
-" NeoBundle 'Shougo/vimproc.vim', {
-"       \ 'build' : {
-"       \     'windows' : 'tools\\update-dll-mingw',
-"       \     'cygwin' : 'make -f make_cygwin.mak',
-"       \     'mac' : 'make -f make_mac.mak',
-"       \     'linux' : 'make',
-"       \     'unix' : 'gmake',
-"       \    },
-"       \ }
+" Plug 'Shougo/unite.vim'
+" Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 " Plug 'Shougo/vimshell.vim'
 " Plug 'Shougo/neocomplete'
 " Plug 'Shougo/neomru.vim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet.vim'
+" Plug 'Shougo/neosnippet-snippets'
 Plug 'hewes/unite-gtags'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
@@ -65,6 +57,20 @@ filetype plugin indent on
 
 let mapleader = ","
 
+" FZF
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Advanced customization using autoload functions
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 " CtrlP
 " if executable('ag')
@@ -114,68 +120,68 @@ let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_follow_symlinks = 1
 
 " Unite
-nnoremap [unite] <Nop>
-nmap <space> [unite]
+" nnoremap [unite] <Nop>
+" nmap <space> [unite]
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-" Start insert mode in unite-action buffer.
-call unite#custom#profile('action', 'context', {
-      \   'start_insert' : 1,
-      \   'smartcase' : 1
-      \ })
+" call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" " Start insert mode in unite-action buffer.
+" call unite#custom#profile('action', 'context', {
+"       \   'start_insert' : 1,
+"       \   'smartcase' : 1
+"       \ })
 
-nnoremap [unite]f :<C-u>Unite -start-insert file_rec/async:!<CR>
+" nnoremap [unite]f :<C-u>Unite -start-insert file_rec/async:!<CR>
 
 
-" Unite: unite-source-history/yank
-let g:unite_source_history_yank_enable = 1
-nnoremap [unite]y :<C-u>Unite history/yank<CR>
+" " Unite: unite-source-history/yank
+" let g:unite_source_history_yank_enable = 1
+" nnoremap [unite]y :<C-u>Unite history/yank<CR>
 
-" Unite: neosnippet-unite-source-neosnippet
-nnoremap [unite]s :<C-u>Unite neosnippet<CR>
+" " Unite: neosnippet-unite-source-neosnippet
+" nnoremap [unite]s :<C-u>Unite neosnippet<CR>
 
-" Unite: unite-source-grep
-let g:unite_source_grep_max_candidates = 200
-" if executable('ag')
-"   " Use ag in unite grep source.
-"   let g:unite_source_grep_command = 'ag'
+" " Unite: unite-source-grep
+" let g:unite_source_grep_max_candidates = 200
+" " if executable('ag')
+" "   " Use ag in unite grep source.
+" "   let g:unite_source_grep_command = 'ag'
+" "   let g:unite_source_grep_default_opts =
+" "         \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+" "         \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+" "   let g:unite_source_grep_recursive_opt = ''
+" " elseif executable('pt')
+" "   " Use pt in unite grep source.
+" "   " https://github.com/monochromegane/the_platinum_searcher
+" "   let g:unite_source_grep_command = 'pt'
+" "   let g:unite_source_grep_default_opts = '-i --nogroup --nocolor'
+" "   let g:unite_source_grep_recursive_opt = ''
+" " elseif executable('ack-grep')
+" if executable('ack') || executable('ack-grep')
+"   " Use ack in unite grep source.
+"   let s:grep_command = 'ack-grep'
+"   if executable('ack')
+"     let s:grep_command = 'ack'
+"   endif
+"   let g:unite_source_grep_command = s:grep_command
 "   let g:unite_source_grep_default_opts =
-"         \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-"         \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+"         \ '--no-heading --no-color -k -H --sort-files --smart-case'
 "   let g:unite_source_grep_recursive_opt = ''
-" elseif executable('pt')
-"   " Use pt in unite grep source.
-"   " https://github.com/monochromegane/the_platinum_searcher
-"   let g:unite_source_grep_command = 'pt'
-"   let g:unite_source_grep_default_opts = '-i --nogroup --nocolor'
-"   let g:unite_source_grep_recursive_opt = ''
-" elseif executable('ack-grep')
-if executable('ack') || executable('ack-grep')
-  " Use ack in unite grep source.
-  let s:grep_command = 'ack-grep'
-  if executable('ack')
-    let s:grep_command = 'ack'
-  endif
-  let g:unite_source_grep_command = s:grep_command
-  let g:unite_source_grep_default_opts =
-        \ '--no-heading --no-color -k -H --sort-files --smart-case'
-  let g:unite_source_grep_recursive_opt = ''
-else
-  let g:unite_source_grep_default_opts = '--exclude-dir=.svn -iIR'
-endif
-nnoremap [unite]ug :<C-u>Unite grep:.::<CR>
+" else
+"   let g:unite_source_grep_default_opts = '--exclude-dir=.svn -iIR'
+" endif
+" nnoremap [unite]ug :<C-u>Unite grep:.::<CR>
 
-" Unite-gtags
-" let g:unite_source_gtags_project_config = {
-"       \ '_': { 'treelize': 1 }
-"       \ }
-" specify your project path as key.
-" '_' in key means default configuration.
-nnoremap [unite]gx :<C-u>Unite gtags/context<CR>
-nnoremap [unite]gr :<C-u>Unite gtags/ref<CR>
-nnoremap [unite]gd :<C-u>Unite gtags/def<CR>
-nnoremap [unite]gg :<C-u>Unite gtags/grep<CR>
-nnoremap [unite]gc :<C-u>Unite gtags/completion<CR>
+" " Unite-gtags
+" " let g:unite_source_gtags_project_config = {
+" "       \ '_': { 'treelize': 1 }
+" "       \ }
+" " specify your project path as key.
+" " '_' in key means default configuration.
+" nnoremap [unite]gx :<C-u>Unite gtags/context<CR>
+" nnoremap [unite]gr :<C-u>Unite gtags/ref<CR>
+" nnoremap [unite]gd :<C-u>Unite gtags/def<CR>
+" nnoremap [unite]gg :<C-u>Unite gtags/grep<CR>
+" nnoremap [unite]gc :<C-u>Unite gtags/completion<CR>
 
 " NERDCommenter
 " Map <C-/> to toggle comment both in normal and visual mode
