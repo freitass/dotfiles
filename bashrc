@@ -10,15 +10,6 @@ else
   export TERM="xterm-color"
 fi
 
-[ -n "$TMUX" ] && {
-if [ -e /lib/terminfo/s/screen-256color ]; then
-  export TERM="screen-256color"
-else
-  export TERM="screen-color"
-fi
-
-}
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -126,18 +117,15 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# hook to load files separated by contexts
+# Hook to load files separated by contexts.
 run_scripts()
 {
   for script in $1/*; do
-    #skip non-executable snippets
+    # Skip non-executable snippets.
     [ -x "$script"  ] || continue
 
     echo -n "processing '$(basename "$script")'... "
-
-    # execute $script in the context of the current shell
     source "$script"
-
     echo "done."
   done
 }
