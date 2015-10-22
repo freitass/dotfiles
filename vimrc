@@ -190,6 +190,12 @@ vmap  <plug>NERDCommenterToggle
 nmap <leader>/ <plug>NERDCommenterToggle
 vmap <leader>/ <plug>NERDCommenterToggle
 
+" Easymotion
+" Multichar search (iterate over the results with C-n)
+nmap <leader>s <Plug>(easymotion-sn)
+xmap <leader>s <Plug>(easymotion-sn)
+omap <leader>s <Plug>(easymotion-sn)
+
 " Tabularize
 nmap <silent> <leader>a= :<C-u>Tabularize /=<CR>
 vmap <silent> <leader>a= :<C-u>Tabularize /=<CR>
@@ -383,7 +389,6 @@ set encoding=utf8
 
 " Appearance
 syntax on
-set hlsearch
 if has("gui_macvim")
   set guifont=Menlo:h12
 endif
@@ -410,6 +415,7 @@ set history=50                    " keep 50 lines of command line history
 set ruler                         " show the cursor position all the time
 set showcmd                       " display incomplete commands
 set incsearch                     " do incremental searching
+set nohlsearch                    " highlight matching string
 set nobackup                      " Disable the creation of backup files (the ones ending with ~)
 set mouse=a                       " enable mouse 'all'
 set number                        " line numbers
