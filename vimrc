@@ -19,10 +19,14 @@ autocmd BufReadPost *
       \ endif
 
 " Move between windows using ctrl-[hjkl]
-nnoremap <silent> <C-K> <C-W>k
-nnoremap <silent> <C-J> <C-W>j
-nnoremap <silent> <C-H> <C-W>h
-nnoremap <silent> <C-L> <C-W>l
+nnoremap <silent> <C-k> <C-W>k
+nnoremap <silent> <C-j> <C-W>j
+nnoremap <silent> <C-h> <C-W>h
+nnoremap <silent> <C-l> <C-W>l
+tnoremap <silent> <C-k> <C-\><C-n><C-W>k
+tnoremap <silent> <C-j> <C-\><C-n><C-W>j
+tnoremap <silent> <C-h> <C-\><C-n><C-W>h
+tnoremap <silent> <C-l> <C-\><C-n><C-W>l
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -86,6 +90,7 @@ autocmd BufEnter ?akefile* set noet ts=8 sw=8 nocindent
 
 " Coming Home To Vim
 inoremap jk <Esc>
+tnoremap jk <C-\><C-n>
 
 " Start external command with a single bang
 nnoremap ! :!
