@@ -379,11 +379,6 @@ autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 Plug 'vim-scripts/a.vim'
 map <silent> <C-Tab> :A<CR>
 
-Plug 'Raimondi/delimitMate'
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
-imap <C-L> <Plug>delimitMateS-Tab
-
 Plug 'tpope/vim-fugitive'
 set diffopt=filler,vertical
 nmap <silent> <leader>gc :Gcommit<CR>
@@ -391,21 +386,20 @@ nmap <silent> <leader>gd :Gdiff<CR>
 nmap <silent> <leader>gp :Git push<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 
-Plug 'vim-scripts/AnsiEsc.vim'
-Plug 'embear/vim-foldsearch'
-Plug 'sheerun/vim-polyglot'
-Plug 'gcmt/wildfire.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'freitass/todo.txt-vim'
-" Plug 'vim-scripts/cscope.vim'
-" Plug 'scrooloose/syntastic'
+Plug 'cohama/lexima.vim'
 Plug 'cream-showinvisibles'
+Plug 'embear/vim-foldsearch'
+Plug 'ferranpm/vim-isolate'
+Plug 'flazz/vim-colorschemes'
+Plug 'freitass/todo.txt-vim'
+Plug 'gcmt/wildfire.vim'
 Plug 'h1mesuke/vim-unittest'
+Plug 'mileszs/ack.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-
-Plug 'flazz/vim-colorschemes'
-" Plug 'altercation/vim-colors-solarized'
+Plug 'vim-scripts/AnsiEsc.vim'
 
 call plug#end()
 
