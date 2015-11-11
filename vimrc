@@ -127,65 +127,6 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 " Advanced customization using autoload functions
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
-" Plug 'Shougo/unite.vim'
-" nnoremap [unite] <Nop>
-" nmap <space> [unite]
-
-" call unite#filters#matcher_default#use(['matcher_fuzzy'])
-" " Start insert mode in unite-action buffer.
-" call unite#custom#profile('action', 'context', {
-"       \   'start_insert' : 1,
-"       \   'smartcase' : 1
-"       \ })
-" nnoremap [unite]f :<C-u>Unite -start-insert file_rec/async:!<CR>
-" " Unite: unite-source-history/yank
-" let g:unite_source_history_yank_enable = 1
-" nnoremap [unite]y :<C-u>Unite history/yank<CR>
-" " Unite: neosnippet-unite-source-neosnippet
-" nnoremap [unite]s :<C-u>Unite neosnippet<CR>
-" " Unite: unite-source-grep
-" let g:unite_source_grep_max_candidates = 200
-" " if executable('ag')
-" "   " Use ag in unite grep source.
-" "   let g:unite_source_grep_command = 'ag'
-" "   let g:unite_source_grep_default_opts =
-" "         \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-" "         \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-" "   let g:unite_source_grep_recursive_opt = ''
-" " elseif executable('pt')
-" "   " Use pt in unite grep source.
-" "   " https://github.com/monochromegane/the_platinum_searcher
-" "   let g:unite_source_grep_command = 'pt'
-" "   let g:unite_source_grep_default_opts = '-i --nogroup --nocolor'
-" "   let g:unite_source_grep_recursive_opt = ''
-" " elseif executable('ack-grep')
-" if executable('ack') || executable('ack-grep')
-"   " Use ack in unite grep source.
-"   let s:grep_command = 'ack-grep'
-"   if executable('ack')
-"     let s:grep_command = 'ack'
-"   endif
-"   let g:unite_source_grep_command = s:grep_command
-"   let g:unite_source_grep_default_opts =
-"         \ '--no-heading --no-color -k -H --sort-files --smart-case'
-"   let g:unite_source_grep_recursive_opt = ''
-" else
-"   let g:unite_source_grep_default_opts = '--exclude-dir=.svn -iIR'
-" endif
-" nnoremap [unite]ug :<C-u>Unite grep:.::<CR>
-
-" Plug 'hewes/unite-gtags'
-" " let g:unite_source_gtags_project_config = {
-" "       \ '_': { 'treelize': 1 }
-" "       \ }
-" " specify your project path as key.
-" " '_' in key means default configuration.
-" nnoremap [unite]gx :<C-u>Unite gtags/context<CR>
-" nnoremap [unite]gr :<C-u>Unite gtags/ref<CR>
-" nnoremap [unite]gd :<C-u>Unite gtags/def<CR>
-" nnoremap [unite]gg :<C-u>Unite gtags/grep<CR>
-" nnoremap [unite]gc :<C-u>Unite gtags/completion<CR>
-
 " Plug 'Shougo/neocomplete'
 " Disable AutoComplPop.
 " let g:acp_enableAtStartup = 0
@@ -270,10 +211,6 @@ inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 " if has('conceal')
 "   set conceallevel=2 concealcursor=i
 " endif
-
-" Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-" Plug 'Shougo/vimshell.vim'
-" Plug 'Shougo/neomru.vim'
 
 Plug 'scrooloose/nerdtree'
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
@@ -390,6 +327,14 @@ nmap <silent> <leader>gd :Gdiff<CR>
 nmap <silent> <leader>gp :Git push<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'hewes/unite-gtags'
+" Plug 'Shougo/vimshell.vim'
+" Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neoyank.vim'
+Plug 'Shougo/unite-outline'
+
 Plug 'cohama/lexima.vim'
 Plug 'cream-showinvisibles'
 Plug 'embear/vim-foldsearch'
@@ -418,4 +363,62 @@ if has('mac')
 else
   colorscheme tango-desert
 endif
+
+nnoremap [unite] <Nop>
+nmap <space> [unite]
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" Start insert mode in unite-action buffer.
+call unite#custom#profile('action', 'context', {
+      \   'start_insert' : 1,
+      \   'smartcase' : 1
+      \ })
+nnoremap [unite]f :<C-u>Unite -start-insert file_rec/async:!<CR>
+" Unite: unite-source-history/yank
+let g:unite_source_history_yank_enable = 1
+nnoremap [unite]y :<C-u>Unite history/yank<CR>
+" Unite: neosnippet-unite-source-neosnippet
+nnoremap [unite]s :<C-u>Unite neosnippet<CR>
+" Unite: unite-source-grep
+let g:unite_source_grep_max_candidates = 200
+" if executable('ag')
+"   " Use ag in unite grep source.
+"   let g:unite_source_grep_command = 'ag'
+"   let g:unite_source_grep_default_opts =
+"         \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+"         \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+"   let g:unite_source_grep_recursive_opt = ''
+" elseif executable('pt')
+"   " Use pt in unite grep source.
+"   " https://github.com/monochromegane/the_platinum_searcher
+"   let g:unite_source_grep_command = 'pt'
+"   let g:unite_source_grep_default_opts = '-i --nogroup --nocolor'
+"   let g:unite_source_grep_recursive_opt = ''
+" elseif executable('ack-grep')
+if executable('ack') || executable('ack-grep')
+  " Use ack in unite grep source.
+  let s:grep_command = 'ack-grep'
+  if executable('ack')
+    let s:grep_command = 'ack'
+  endif
+  let g:unite_source_grep_command = s:grep_command
+  let g:unite_source_grep_default_opts =
+        \ '--no-heading --no-color -k -H --sort-files --smart-case'
+  let g:unite_source_grep_recursive_opt = ''
+else
+  let g:unite_source_grep_default_opts = '--exclude-dir=.svn -iIR'
+endif
+nnoremap [unite]ug :<C-u>Unite grep:.::<CR>
+
+" let g:unite_source_gtags_project_config = {
+"       \ '_': { 'treelize': 1 }
+"       \ }
+" specify your project path as key.
+" '_' in key means default configuration.
+nnoremap [unite]gx :<C-u>Unite gtags/context<CR>
+nnoremap [unite]gr :<C-u>Unite gtags/ref<CR>
+nnoremap [unite]gd :<C-u>Unite gtags/def<CR>
+nnoremap [unite]gg :<C-u>Unite gtags/grep<CR>
+nnoremap [unite]gc :<C-u>Unite gtags/completion<CR>
+
+nnoremap [unite]o :<C-u>Unite -buffer-name=outline outline<CR>
 
