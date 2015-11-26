@@ -34,9 +34,6 @@ endif
 nmap <silent> <leader>ve :e $MYVIMRC<CR>
 nmap <silent> <leader>vs :so $MYVIMRC<CR>
 
-" Latex file encoding
-" autocmd FileType plaintex setlocal fileencoding=utf8
-
 " Appearance
 syntax on
 if has("gui_macvim")
@@ -84,11 +81,6 @@ if has('wildmenu')
   set wildmenu
   set wildmode=longest,list
 endif
-
-" add list lcs=tab:>-,trail:x for tab/trailing space visuals
-" set list
-" set lcs=tab:>-,trail:x
-autocmd BufEnter ?akefile* set noet ts=8 sw=8 nocindent
 
 " Coming Home To Vim
 inoremap jk <Esc>
@@ -419,6 +411,7 @@ nnoremap [unite]gr :<C-u>Unite gtags/ref<CR>
 nnoremap [unite]gd :<C-u>Unite gtags/def<CR>
 nnoremap [unite]gg :<C-u>Unite gtags/grep<CR>
 nnoremap [unite]gc :<C-u>Unite gtags/completion<CR>
+nnoremap [unite]gf :<C-u>Unite gtags/file<CR>
 
 nnoremap [unite]o :<C-u>Unite -buffer-name=outline outline<CR>
 
