@@ -341,6 +341,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/AnsiEsc.vim'
+Plug 'wellle/visual-split.vim'
 
 call plug#end()
 
