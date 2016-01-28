@@ -88,6 +88,11 @@ if has('nvim')
   tnoremap jk <C-\><C-n>
 endif
 
+" Python support
+if has('nvim')
+  let g:python_host_prog = '/usr/bin/python'
+endif
+
 " Start external command with a single bang
 nnoremap ! :!
 
