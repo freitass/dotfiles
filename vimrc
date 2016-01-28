@@ -233,10 +233,35 @@ nmap <leader>s <Plug>(easymotion-sn)
 xmap <leader>s <Plug>(easymotion-sn)
 omap <leader>s <Plug>(easymotion-sn)
 
-" Plug 'Valloric/YouCompleteMe'
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
-" nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+Plug 'Valloric/YouCompleteMe'
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+" make YCM compatible with UltiSnips
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+" Add the virtualenv's site-packages to vim path
+if has('python')
+py << EOF
+import os
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  sys.path.insert(0, project_base_dir)
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+endif
+
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 Plug 'godlygeek/tabular'
 nmap <silent> <leader>a= :<C-u>Tabularize /=<CR>
@@ -374,8 +399,6 @@ nnoremap [unite]f :<C-u>Unite -start-insert file_rec/async:!<CR>
 " Unite: unite-source-history/yank
 let g:unite_source_history_yank_enable = 1
 nnoremap [unite]y :<C-u>Unite history/yank<CR>
-" Unite: neosnippet-unite-source-neosnippet
-nnoremap [unite]s :<C-u>Unite neosnippet<CR>
 " Unite: unite-source-grep
 let g:unite_source_grep_max_candidates = 200
 " if executable('ag')
