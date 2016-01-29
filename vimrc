@@ -19,10 +19,10 @@ autocmd BufReadPost *
       \ endif
 
 " Move between windows using ctrl-[hjkl]
-nnoremap <silent> <C-k> <C-W>k
-nnoremap <silent> <C-j> <C-W>j
-nnoremap <silent> <C-h> <C-W>h
-nnoremap <silent> <C-l> <C-W>l
+nnoremap <C-k> <C-W>k
+nnoremap <C-j> <C-W>j
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 if has('nvim')
   tnoremap <silent> <C-k> <C-\><C-n><C-W>k
   tnoremap <silent> <C-j> <C-\><C-n><C-W>j
@@ -189,25 +189,25 @@ endif
 " " https://github.com/c9s/perlomni.vim
 " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-" Plug 'Shougo/neosnippet.vim'
-" Plug 'Shougo/neosnippet-snippets'
-" " Load custom snippets.
-" let g:neosnippet#snippets_directory = '~/dotfiles/snippets'
-" " Plugin key-mappings.
-" " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" " smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" " xmap <C-k>     <Plug>(neosnippet_expand_target)
-" " SuperTab like snippets behavior.
-" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"       \ "\<Plug>(neosnippet_expand_or_jump)"
-"       \: pumvisible() ? "\<C-n>" : "\<TAB>"
-" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"       \ "\<Plug>(neosnippet_expand_or_jump)"
-"       \: "\<TAB>"
-" " For snippet_complete marker.
-" if has('conceal')
-"   set conceallevel=2 concealcursor=i
-" endif
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+" Load custom snippets.
+let g:neosnippet#snippets_directory = '~/dotfiles/snippets'
+" Plugin key-mappings.
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 Plug 'scrooloose/nerdtree'
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
