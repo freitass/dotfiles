@@ -52,9 +52,9 @@ set number                        " line numbers
 set scrolloff=1                   " Keep the cursor away from top/bottom
 set wildmode=longest,list         " TAB completion (such as bash)
 set ignorecase smartcase          " Ignore case when search pattern is all lowercase
-set shiftwidth=2                  " # of spaces of auto indent
-set softtabstop=2                 " # of spaces of <TAB> key
-set tabstop=2                     " # of spaces erased when deleting a <TAB>
+set shiftwidth=4                  " # of spaces of auto indent
+set softtabstop=4                 " # of spaces of <TAB> key
+set tabstop=4                     " # of spaces erased when deleting a <TAB>
 set expandtab                     " Insert spaces instead of tabs
 set smarttab                      " 'siftwidth' in front of a line
 set clipboard=unnamed,unnamedplus " for simplified clipboard copy/paste
@@ -108,21 +108,21 @@ if system('uname -o') =~ '^GNU/'
   let g:make = 'make'
 endif
 
-let g:fzf_install = 'yes | ./install'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': g:fzf_install}
-Plug 'junegunn/fzf.vim'
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-nnoremap <c-p> :Files<CR>
-nnoremap <leader><c-p> :Buffers<CR>
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-" Advanced customization using autoload functions
-inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+" let g:fzf_install = 'yes | ./install'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': g:fzf_install}
+" Plug 'junegunn/fzf.vim'
+" nmap <leader><tab> <plug>(fzf-maps-n)
+" xmap <leader><tab> <plug>(fzf-maps-x)
+" omap <leader><tab> <plug>(fzf-maps-o)
+" nnoremap <c-p> :Files<CR>
+" nnoremap <leader><c-p> :Buffers<CR>
+" " Insert mode completion
+" imap <c-x><c-k> <plug>(fzf-complete-word)
+" imap <c-x><c-f> <plug>(fzf-complete-path)
+" imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+" imap <c-x><c-l> <plug>(fzf-complete-line)
+" " Advanced customization using autoload functions
+" inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 " Plug 'Shougo/neocomplete'
 " Disable AutoComplPop.
@@ -273,53 +273,53 @@ vmap <silent> <leader>a:: :<C-u>Tabularize /:\zs<CR>
 nmap <silent> <leader>a, :<C-u>Tabularize /,<CR>
 vmap <silent> <leader>a, :<C-u>Tabularize /,<CR>
 
-" Plug 'kien/ctrlp.vim'
-" Plug 'FelikZ/ctrlp-py-matcher'
-" if executable('ag')
-"   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-"         \ --ignore .git
-"         \ --ignore .svn
-"         \ --ignore .hg
-"         \ --ignore .settings
-"         \ --ignore .project
-"         \ --ignore .cproject
-"         \ --ignore .DS_Store
-"         \ --ignore "**/*.pyc"
-"         \ --ignore "**/*.exe"
-"         \ --ignore "**/*.pdf"
-"         \ --ignore "**/*.so"
-"         \ --ignore "**/*.png"
-"         \ --ignore "**/*.jpeg"
-"         \ --ignore "**/*.dll"
-"         \ --ignore "**/*.lib"
-"         \ --ignore "**/*.o"
-"         \ --ignore "**/*.a"
-"         \ --ignore "**/*.dex"
-"         \ --ignore "**/*.class"
-"         \ --ignore "**/*.bin"
-"         \ --ignore "**/*.db"
-"         \ --ignore "**/*.bmp"
-"         \ --ignore "**/*.apk"
-"         \ --ignore "**/*.zip"
-"         \ --ignore "**/*.tar"
-"         \ --ignore "**/*.tar.bz"
-"         \ --ignore "**/*.tar.bz2"
-"         \ --ignore "**/*.tar.gz"
-"         \ --ignore "**/*.tar.xz"
-"         \ --ignore "**/*.tar.lzma"
-"         \ --ignore "**/*.rar"
-"         \ --ignore "**/*.db"
-"         \ --ignore "**/*.d"
-"         \ -g ""'
-" endif
+Plug 'kien/ctrlp.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+        \ --ignore .git
+        \ --ignore .svn
+        \ --ignore .hg
+        \ --ignore .settings
+        \ --ignore .project
+        \ --ignore .cproject
+        \ --ignore .DS_Store
+        \ --ignore "**/*.pyc"
+        \ --ignore "**/*.exe"
+        \ --ignore "**/*.pdf"
+        \ --ignore "**/*.so"
+        \ --ignore "**/*.png"
+        \ --ignore "**/*.jpeg"
+        \ --ignore "**/*.dll"
+        \ --ignore "**/*.lib"
+        \ --ignore "**/*.o"
+        \ --ignore "**/*.a"
+        \ --ignore "**/*.dex"
+        \ --ignore "**/*.class"
+        \ --ignore "**/*.bin"
+        \ --ignore "**/*.db"
+        \ --ignore "**/*.bmp"
+        \ --ignore "**/*.apk"
+        \ --ignore "**/*.zip"
+        \ --ignore "**/*.tar"
+        \ --ignore "**/*.tar.bz"
+        \ --ignore "**/*.tar.bz2"
+        \ --ignore "**/*.tar.gz"
+        \ --ignore "**/*.tar.xz"
+        \ --ignore "**/*.tar.lzma"
+        \ --ignore "**/*.rar"
+        \ --ignore "**/*.db"
+        \ --ignore "**/*.d"
+        \ -g ""'
+endif
 " Window configurations:
 " 	position:bottom
 " 	order (of results):top to bottom (ttb)
-" let g:ctrlp_match_window = 'bottom,order:ttb'
-" let g:ctrlp_working_path_mode = ''  " working path won't change when opening new files
-" let g:ctrlp_switch_buffer = 'Et'    " jump to opened window (if any)
-" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-" let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_working_path_mode = ''  " working path won't change when opening new files
+let g:ctrlp_switch_buffer = 'Et'    " jump to opened window (if any)
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_follow_symlinks = 1
 
 Plug 'rhysd/vim-clang-format'
 Plug 'kana/vim-operator-user'
