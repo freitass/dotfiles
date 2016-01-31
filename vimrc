@@ -1,9 +1,9 @@
 if !has('nvim')
-  set nocompatible
-  set encoding=utf8
-  if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-  endif
+    set nocompatible
+    set encoding=utf8
+    if $COLORTERM == 'gnome-terminal'
+        set t_Co=256
+    endif
 endif
 
 let mapleader = ","
@@ -14,9 +14,9 @@ filetype plugin indent on
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
 autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal g`\"" |
-      \ endif
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal g`\"" |
+            \ endif
 
 " Move between windows using ctrl-[hjkl]
 nnoremap <C-k> <C-W>k
@@ -24,10 +24,10 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
 if has('nvim')
-  tnoremap <silent> <C-k> <C-\><C-n><C-W>k
-  tnoremap <silent> <C-j> <C-\><C-n><C-W>j
-  tnoremap <silent> <C-h> <C-\><C-n><C-W>h
-  tnoremap <silent> <C-l> <C-\><C-n><C-W>l
+    tnoremap <silent> <C-k> <C-\><C-n><C-W>k
+    tnoremap <silent> <C-j> <C-\><C-n><C-W>j
+    tnoremap <silent> <C-h> <C-\><C-n><C-W>h
+    tnoremap <silent> <C-l> <C-\><C-n><C-W>l
 endif
 
 " Quickly edit/reload the vimrc file
@@ -37,7 +37,7 @@ nmap <silent> <leader>vs :so $MYVIMRC<CR>
 " Appearance
 syntax on
 if has("gui_macvim")
-  set guifont=Menlo:h12
+    set guifont=Menlo:h12
 endif
 
 set backspace=indent,eol,start    " allow backspacing over everything in insert mode
@@ -74,38 +74,38 @@ set statusline+=%10((%l,%c)%)\                 " line and column
 set statusline+=%P                             " percentage of file
 
 if has('wildmenu')
-  set wildignore+=*.a,*.o
-  set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-  set wildignore+=.DS_Store,.git,.hg,.svn
-  set wildignore+=*~,*.swp,*.tmp
-  set wildmenu
-  set wildmode=longest,list
+    set wildignore+=*.a,*.o
+    set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+    set wildignore+=.DS_Store,.git,.hg,.svn
+    set wildignore+=*~,*.swp,*.tmp
+    set wildmenu
+    set wildmode=longest,list
 endif
 
 " Coming Home To Vim
 inoremap jk <Esc>
 if has('nvim')
-  tnoremap jk <C-\><C-n>
+    tnoremap jk <C-\><C-n>
 endif
 
 " Python support
 if has('nvim')
-  let g:python_host_prog = '/usr/bin/python'
+    let g:python_host_prog = '/usr/bin/python'
 endif
 
 " Start external command with a single bang
 nnoremap ! :!
 
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 call plug#begin(expand('~/.vim/bundle/'))
 
 let g:make = 'gmake'
 if system('uname -o') =~ '^GNU/'
-  let g:make = 'make'
+    let g:make = 'make'
 endif
 
 " let g:fzf_install = 'yes | ./install'
@@ -199,14 +199,14 @@ let g:neosnippet#snippets_directory = '~/dotfiles/snippets'
 " xmap <C-k>     <Plug>(neosnippet_expand_target)
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: pumvisible() ? "\<C-n>" : "\<TAB>"
+            \ "\<Plug>(neosnippet_expand_or_jump)"
+            \: pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: "\<TAB>"
+            \ "\<Plug>(neosnippet_expand_or_jump)"
+            \: "\<TAB>"
 " For snippet_complete marker.
 if has('conceal')
-  set conceallevel=2 concealcursor=i
+    set conceallevel=2 concealcursor=i
 endif
 
 Plug 'scrooloose/nerdtree'
@@ -242,15 +242,15 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " Add the virtualenv's site-packages to vim path
 if has('python')
-py << EOF
-import os
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  sys.path.insert(0, project_base_dir)
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
+    py << EOF
+    import os
+    import sys
+    import vim
+    if 'VIRTUAL_ENV' in os.environ:
+        project_base_dir = os.environ['VIRTUAL_ENV']
+        sys.path.insert(0, project_base_dir)
+        activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+        execfile(activate_this, dict(__file__=activate_this))
 EOF
 endif
 
@@ -276,41 +276,41 @@ vmap <silent> <leader>a, :<C-u>Tabularize /,<CR>
 Plug 'kien/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-        \ --ignore .git
-        \ --ignore .svn
-        \ --ignore .hg
-        \ --ignore .settings
-        \ --ignore .project
-        \ --ignore .cproject
-        \ --ignore .DS_Store
-        \ --ignore "**/*.pyc"
-        \ --ignore "**/*.exe"
-        \ --ignore "**/*.pdf"
-        \ --ignore "**/*.so"
-        \ --ignore "**/*.png"
-        \ --ignore "**/*.jpeg"
-        \ --ignore "**/*.dll"
-        \ --ignore "**/*.lib"
-        \ --ignore "**/*.o"
-        \ --ignore "**/*.a"
-        \ --ignore "**/*.dex"
-        \ --ignore "**/*.class"
-        \ --ignore "**/*.bin"
-        \ --ignore "**/*.db"
-        \ --ignore "**/*.bmp"
-        \ --ignore "**/*.apk"
-        \ --ignore "**/*.zip"
-        \ --ignore "**/*.tar"
-        \ --ignore "**/*.tar.bz"
-        \ --ignore "**/*.tar.bz2"
-        \ --ignore "**/*.tar.gz"
-        \ --ignore "**/*.tar.xz"
-        \ --ignore "**/*.tar.lzma"
-        \ --ignore "**/*.rar"
-        \ --ignore "**/*.db"
-        \ --ignore "**/*.d"
-        \ -g ""'
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+                \ --ignore .git
+                \ --ignore .svn
+                \ --ignore .hg
+                \ --ignore .settings
+                \ --ignore .project
+                \ --ignore .cproject
+                \ --ignore .DS_Store
+                \ --ignore "**/*.pyc"
+                \ --ignore "**/*.exe"
+                \ --ignore "**/*.pdf"
+                \ --ignore "**/*.so"
+                \ --ignore "**/*.png"
+                \ --ignore "**/*.jpeg"
+                \ --ignore "**/*.dll"
+                \ --ignore "**/*.lib"
+                \ --ignore "**/*.o"
+                \ --ignore "**/*.a"
+                \ --ignore "**/*.dex"
+                \ --ignore "**/*.class"
+                \ --ignore "**/*.bin"
+                \ --ignore "**/*.db"
+                \ --ignore "**/*.bmp"
+                \ --ignore "**/*.apk"
+                \ --ignore "**/*.zip"
+                \ --ignore "**/*.tar"
+                \ --ignore "**/*.tar.bz"
+                \ --ignore "**/*.tar.bz2"
+                \ --ignore "**/*.tar.gz"
+                \ --ignore "**/*.tar.xz"
+                \ --ignore "**/*.tar.lzma"
+                \ --ignore "**/*.rar"
+                \ --ignore "**/*.db"
+                \ --ignore "**/*.d"
+                \ -g ""'
 endif
 " Window configurations:
 " 	position:bottom
@@ -328,9 +328,9 @@ Plug 'kana/vim-operator-user'
 let g:clang_format#command = "clang-format-3.5"
 let g:clang_format#code_style = "google"
 let g:clang_format#style_options = {
-  \ "AccessModifierOffset" : -1,
-  \ "AlwaysBreakTemplateDeclarations" : "true",
-  \ "Standard" : "C++03"}
+            \ "AccessModifierOffset" : -1,
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++03"}
 " \ "UseTab" : "ForIndentation"}
 " \ "SpaceAfterCStyleCast" : "true",
 " map to <Leader>cf in C++ code
@@ -377,14 +377,14 @@ call plug#end()
 
 set background=dark
 if has('mac')
-  if !has('gui')
-    let g:solarized_termtrans=0 " Required by iTerm2
-  else
-    let g:solarized_termtrans=1
-  endif
-  colorscheme solarized
+    if !has('gui')
+        let g:solarized_termtrans=0 " Required by iTerm2
+    else
+        let g:solarized_termtrans=1
+    endif
+    colorscheme solarized
 else
-  colorscheme tango-desert
+    colorscheme tango-desert
 endif
 
 nnoremap [unite] <Nop>
@@ -392,9 +392,9 @@ nmap <space> [unite]
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 " Start insert mode in unite-action buffer.
 call unite#custom#profile('action', 'context', {
-      \   'start_insert' : 1,
-      \   'smartcase' : 1
-      \ })
+            \   'start_insert' : 1,
+            \   'smartcase' : 1
+            \ })
 nnoremap [unite]f :<C-u>Unite -start-insert file_rec/async:!<CR>
 " Unite: unite-source-history/yank
 let g:unite_source_history_yank_enable = 1
@@ -416,17 +416,17 @@ let g:unite_source_grep_max_candidates = 200
 "   let g:unite_source_grep_recursive_opt = ''
 " elseif executable('ack-grep')
 if executable('ack') || executable('ack-grep')
-  " Use ack in unite grep source.
-  let s:grep_command = 'ack-grep'
-  if executable('ack')
-    let s:grep_command = 'ack'
-  endif
-  let g:unite_source_grep_command = s:grep_command
-  let g:unite_source_grep_default_opts =
-        \ '--no-heading --no-color -k -H --sort-files --smart-case'
-  let g:unite_source_grep_recursive_opt = ''
+    " Use ack in unite grep source.
+    let s:grep_command = 'ack-grep'
+    if executable('ack')
+        let s:grep_command = 'ack'
+    endif
+    let g:unite_source_grep_command = s:grep_command
+    let g:unite_source_grep_default_opts =
+                \ '--no-heading --no-color -k -H --sort-files --smart-case'
+    let g:unite_source_grep_recursive_opt = ''
 else
-  let g:unite_source_grep_default_opts = '--exclude-dir=.svn -iIR'
+    let g:unite_source_grep_default_opts = '--exclude-dir=.svn -iIR'
 endif
 nnoremap [unite]ug :<C-u>Unite grep:.::<CR>
 
