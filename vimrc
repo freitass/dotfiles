@@ -239,24 +239,30 @@ xmap <leader>s <Plug>(easymotion-sn)
 omap <leader>s <Plug>(easymotion-sn)
 
 Plug 'Valloric/YouCompleteMe'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 " let g:ycm_server_python_interpreter = '/usr/local/bin/python'
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_use_ultisnips_completer = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
 " make YCM compatible with UltiSnips
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " Add the virtualenv's site-packages to vim path
 if has('python')
-    py << EOF
-    import os
-    import sys
-    import vim
-    if 'VIRTUAL_ENV' in os.environ:
-        project_base_dir = os.environ['VIRTUAL_ENV']
-        sys.path.insert(0, project_base_dir)
-        activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-        execfile(activate_this, dict(__file__=activate_this))
+py << EOF
+import os
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
 EOF
 endif
 
