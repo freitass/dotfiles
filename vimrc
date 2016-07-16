@@ -94,7 +94,8 @@ endif
 
 " Python support
 if has('nvim')
-    let g:python_host_prog = '/usr/bin/python'
+    let g:python_host_prog = '/usr/local/bin/python'
+    let g:python3_host_prog = '/usr/local/bin/python3'
 endif
 
 " Start external command with a single bang
@@ -240,6 +241,7 @@ omap <leader>s <Plug>(easymotion-sn)
 Plug 'Valloric/YouCompleteMe'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+" let g:ycm_server_python_interpreter = '/usr/local/bin/python'
 " make YCM compatible with UltiSnips
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
