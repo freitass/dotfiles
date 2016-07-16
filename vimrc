@@ -28,6 +28,10 @@ if has('nvim')
     tnoremap <silent> <C-j> <C-\><C-n><C-W>j
     tnoremap <silent> <C-h> <C-\><C-n><C-W>h
     tnoremap <silent> <C-l> <C-\><C-n><C-W>l
+
+    " Enter/leave term buffer in insert mode
+    autocmd BufWinEnter,WinEnter term://* startinsert
+    autocmd BufLeave term://* stopinsert
 endif
 
 " Quickly edit/reload the vimrc file
