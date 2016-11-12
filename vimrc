@@ -337,7 +337,7 @@ Plug 'rhysd/vim-clang-format'
 Plug 'kana/vim-operator-user'
 " clang-format
 " style_options: http://clang.llvm.org/docs/ClangFormatStyleOptions.html
-let g:clang_format#command = "clang-format-3.5"
+let g:clang_format#command = "clang-format"
 let g:clang_format#code_style = "google"
 let g:clang_format#style_options = {
             \ "AccessModifierOffset" : -1,
