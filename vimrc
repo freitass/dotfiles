@@ -369,6 +369,7 @@ Plug 'hewes/unite-gtags'
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/unite-outline'
 
+Plug 'c0nk/vim-gn'
 Plug 'cohama/lexima.vim'
 Plug 'cream-showinvisibles'
 Plug 'embear/vim-foldsearch'
@@ -380,6 +381,7 @@ Plug 'h1mesuke/vim-unittest'
 Plug 'mileszs/ack.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/AnsiEsc.vim'
@@ -402,15 +404,21 @@ endif
 nnoremap [unite] <Nop>
 nmap <space> [unite]
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-" Start insert mode in unite-action buffer.
-call unite#custom#profile('action', 'context', {
+call unite#custom#profile('default', 'context', {
             \   'start_insert' : 1,
-            \   'smartcase' : 1
+            \   'smartcase' : 1,
+            \   'winheight' : 10,
+            \   'direction' : 'botright',
             \ })
-nnoremap [unite]f :<C-u>Unite -start-insert file_rec/async:!<CR>
+" Start insert mode in unite-action buffer.
+" call unite#custom#profile('action', 'context', {
+"             \   'start_insert' : 1,
+"             \   'smartcase' : 1,
+"             \ })
+nnoremap [unite]f :<C-u>Unite -start-insert -buffer-name=file_rec file_rec/async:!<CR>
 " Unite: unite-source-history/yank
 let g:unite_source_history_yank_enable = 1
-nnoremap [unite]y :<C-u>Unite history/yank<CR>
+nnoremap [unite]y :<C-u>Unite -buffer-name=yank history/yank<CR>
 " Unite: unite-source-grep
 let g:unite_source_grep_max_candidates = 200
 " if executable('ag')
@@ -440,19 +448,30 @@ if executable('ack') || executable('ack-grep')
 else
     let g:unite_source_grep_default_opts = '--exclude-dir=.svn -iIR'
 endif
-nnoremap [unite]ug :<C-u>Unite grep:.::<CR>
+nnoremap [unite]<space> :<C-u>Unite<CR>
+nnoremap [unite]ug :<C-u>Unite -buffer-name=grep grep:.::<CR>
 
 " let g:unite_source_gtags_project_config = {
 "       \ '_': { 'treelize': 1 }
 "       \ }
 " specify your project path as key.
 " '_' in key means default configuration.
-nnoremap [unite]gx :<C-u>Unite gtags/context<CR>
-nnoremap [unite]gr :<C-u>Unite gtags/ref<CR>
-nnoremap [unite]gd :<C-u>Unite gtags/def<CR>
-nnoremap [unite]gg :<C-u>Unite gtags/grep<CR>
-nnoremap [unite]gc :<C-u>Unite gtags/completion<CR>
-nnoremap [unite]gf :<C-u>Unite gtags/file<CR>
+nnoremap [unite]gx :<C-u>Unite -buffer-name=gtags-context     gtags/context<CR>
+nnoremap [unite]gr :<C-u>Unite -buffer-name=gtags-ref         gtags/ref<CR>
+nnoremap [unite]gd :<C-u>Unite -buffer-name=gtags-def         gtags/def<CR>
+nnoremap [unite]gg :<C-u>Unite -buffer-name=gtags-grep        gtags/grep<CR>
+nnoremap [unite]gc :<C-u>Unite -buffer-name=gtags-completion  gtags/completion<CR>
+nnoremap [unite]gf :<C-u>Unite -buffer-name=gtags-file        gtags/file<CR>
 
 nnoremap [unite]o :<C-u>Unite -buffer-name=outline outline<CR>
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+    " Play nice with supertab
+    let b:SuperTabDisabled=1
+    " Enable navigation with control-j and control-k in insert mode
+    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
 
