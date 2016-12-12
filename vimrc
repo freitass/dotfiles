@@ -478,3 +478,6 @@ function! s:unite_settings()
     imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
 
+
+" Search in project
+nnoremap <leader>* :Ack! -w <c-r>=expand("<cword>")<cr>
