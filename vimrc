@@ -19,6 +19,9 @@ autocmd BufReadPost *
             \ endif
 
 " Move between windows using ctrl-[hjkl]
+" Note: on MacOS there's a issue preventing <C-h> from working. Description
+" and solution can be found here:
+" https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 nnoremap <C-k> <C-W>k
 nnoremap <C-j> <C-W>j
 nnoremap <C-h> <C-W>h
@@ -54,10 +57,11 @@ set nobackup                      " Disable the creation of backup files (the on
 set mouse=a                       " enable mouse 'all'
 set number                        " line numbers
 set scrolloff=1                   " Keep the cursor away from top/bottom
+set wildmode=longest,list         " TAB completion (such as bash)
 set ignorecase smartcase          " Ignore case when search pattern is all lowercase
-set shiftwidth=4                  " # of spaces of auto indent
-set softtabstop=4                 " # of spaces of <TAB> key
-set tabstop=4                     " # of spaces erased when deleting a <TAB>
+set shiftwidth=2                  " # of spaces of auto indent
+set softtabstop=2                 " # of spaces of <TAB> key
+set tabstop=2                     " # of spaces erased when deleting a <TAB>
 set expandtab                     " Insert spaces instead of tabs
 set smarttab                      " 'siftwidth' in front of a line
 set clipboard=unnamed,unnamedplus " for simplified clipboard copy/paste
@@ -343,10 +347,10 @@ let g:clang_format#style_options = {
 " \ "UseTab" : "ForIndentation"}
 " \ "SpaceAfterCStyleCast" : "true",
 " map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+autocmd FileType c,cpp,objc,objcpp nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc,objcpp vnoremap <buffer><Leader>cf :ClangFormat<CR>
 " if you install vim-operator-user
-autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+autocmd FileType c,cpp,objc,objcpp map <buffer><Leader>x <Plug>(operator-clang-format)
 
 Plug 'vim-scripts/a.vim'
 map <silent> <C-Tab> :A<CR>
@@ -477,6 +481,9 @@ function! s:unite_settings()
     imap <buffer> <C-j>   <Plug>(unite_select_next_line)
     imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
+
+" Search in project
+nnoremap <leader>* :Ack! -w <c-r>=expand("<cword>")<cr>
 
 set exrc                          " enable per-directory .vimrc files
 set secure                        " disable unsafe commands in local .vimrc files

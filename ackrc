@@ -1,1 +1,3 @@
 --smart-case
+--type-add=gyp:ext:gyp,gypi
+--type-add=gn:ext:gn,gni
