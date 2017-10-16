@@ -52,12 +52,11 @@ set history=50                    " keep 50 lines of command line history
 set ruler                         " show the cursor position all the time
 set showcmd                       " display incomplete commands
 set incsearch                     " do incremental searching
-set nohlsearch                    " highlight matching string
+" set nohlsearch                    " highlight matching string
 set nobackup                      " Disable the creation of backup files (the ones ending with ~)
 set mouse=a                       " enable mouse 'all'
 set number                        " line numbers
 set scrolloff=1                   " Keep the cursor away from top/bottom
-set wildmode=longest,list         " TAB completion (such as bash)
 set ignorecase smartcase          " Ignore case when search pattern is all lowercase
 set shiftwidth=2                  " # of spaces of auto indent
 set softtabstop=2                 " # of spaces of <TAB> key
@@ -84,7 +83,7 @@ if has('wildmenu')
     set wildignore+=.DS_Store,.git,.hg,.svn
     set wildignore+=*~,*.swp,*.tmp
     set wildmenu
-    " set wildmode=longest,list
+    set wildmode=longest,list  " TAB completion (such as bash)
 endif
 
 " Coming Home To Vim
@@ -114,8 +113,7 @@ if system('uname -o') =~ '^GNU/'
     let g:make = 'make'
 endif
 
-let g:fzf_install = 'yes | ./install'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': g:fzf_install}
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'junegunn/fzf.vim'
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
@@ -130,96 +128,11 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 " Advanced customization using autoload functions
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
-" Plug 'Shougo/neocomplete'
-" Disable AutoComplPop.
-" let g:acp_enableAtStartup = 0
-" " Use neocomplete.
-" let g:neocomplete#enable_at_startup = 1
-" " Use smartcase.
-" let g:neocomplete#enable_smart_case = 1
-" " Set minimum syntax keyword length.
-" let g:neocomplete#sources#syntax#min_keyword_length = 3
-" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-" " Define dictionary.
-" let g:neocomplete#sources#dictionary#dictionaries = {
-"       \ 'default' : '',
-"       \ 'vimshell' : $HOME.'/.vimshell_hist',
-"       \ 'scheme' : $HOME.'/.gosh_completions'
-"       \ }
-" " Define keyword.
-" if !exists('g:neocomplete#keyword_patterns')
-"   let g:neocomplete#keyword_patterns = {}
-" endif
-" let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-" " Plugin key-mappings.
-" inoremap <expr><C-g>     neocomplete#undo_completion()
-" inoremap <expr><C-l>     neocomplete#complete_common_string()
-" " Recommended key-mappings.
-" " <CR>: close popup and save indent.
-" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-" function! s:my_cr_function()
-"   return neocomplete#close_popup() . "\<CR>"
-"   " For no inserting <CR> key.
-"   "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-" endfunction
-" " <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" " <C-h>, <BS>: close popup and delete backword char.
-" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><C-y>  neocomplete#close_popup()
-" inoremap <expr><C-e>  neocomplete#cancel_popup()
-" " Close popup by <Space>.
-" "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-" " AutoComplPop like behavior.
-" "let g:neocomplete#enable_auto_select = 1
-" " Shell like behavior(not recommended).
-" "set completeopt+=longest
-" "let g:neocomplete#enable_auto_select = 1
-" "let g:neocomplete#disable_auto_complete = 1
-" "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-" " Enable omni completion.
-" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" " Enable heavy omni completion.
-" if !exists('g:neocomplete#sources#omni#input_patterns')
-"   let g:neocomplete#sources#omni#input_patterns = {}
-" endif
-" "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-" "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-" "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-" " For perlomni.vim setting.
-" " https://github.com/c9s/perlomni.vim
-" let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-" Load custom snippets.
-let g:neosnippet#snippets_directory = '~/dotfiles/snippets'
-" Plugin key-mappings.
-" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" xmap <C-k>     <Plug>(neosnippet_expand_target)
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)"
-            \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)"
-            \: "\<TAB>"
-" For snippet_complete marker.
-if has('conceal')
-    set conceallevel=2 concealcursor=i
-endif
-
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 nnoremap <silent> <F8> :NERDTreeToggle<CR>
 nnoremap <silent> <leader>a :NERDTreeToggle<CR>
 
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 let g:tagbar_sort      = 0  " Display tags the same order they appear in the source file
 let g:tagbar_width     = 30 " Set Tagbar window width to 30
 let g:tagbar_autofocus = 1  " Change the focus to the Tagbar window whenever it is opened
@@ -228,8 +141,6 @@ nnoremap <silent> <leader>f :TagbarToggle<CR>
 
 Plug 'ddollar/nerdcommenter'
 " Map <C-/> to toggle comment both in normal and visual mode
-nmap  <plug>NERDCommenterToggle
-vmap  <plug>NERDCommenterToggle
 nmap <leader>/ <plug>NERDCommenterToggle
 vmap <leader>/ <plug>NERDCommenterToggle
 
@@ -239,20 +150,26 @@ nmap <leader>s <Plug>(easymotion-sn)
 xmap <leader>s <Plug>(easymotion-sn)
 omap <leader>s <Plug>(easymotion-sn)
 
-Plug 'Valloric/YouCompleteMe'
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --clang-completer
+  endif
+endfunction
+
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
-" let g:ycm_server_python_interpreter = '/usr/local/bin/python'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_use_ultisnips_completer = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
-" make YCM compatible with UltiSnips
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+let g:ycm_always_populate_location_list = 1
+
 " Add the virtualenv's site-packages to vim path
 if has('python')
 py << EOF
@@ -267,15 +184,6 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 endif
 
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<Tab>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 Plug 'godlygeek/tabular'
 nmap <silent> <leader>a= :<C-u>Tabularize /=<CR>
 vmap <silent> <leader>a= :<C-u>Tabularize /=<CR>
@@ -285,54 +193,6 @@ nmap <silent> <leader>a:: :<C-u>Tabularize /:\zs<CR>
 vmap <silent> <leader>a:: :<C-u>Tabularize /:\zs<CR>
 nmap <silent> <leader>a, :<C-u>Tabularize /,<CR>
 vmap <silent> <leader>a, :<C-u>Tabularize /,<CR>
-
-" Plug 'kien/ctrlp.vim'
-" Plug 'FelikZ/ctrlp-py-matcher'
-" if executable('ag')
-"     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-"                 \ --ignore .git
-"                 \ --ignore .svn
-"                 \ --ignore .hg
-"                 \ --ignore .settings
-"                 \ --ignore .project
-"                 \ --ignore .cproject
-"                 \ --ignore .DS_Store
-"                 \ --ignore "**/*.pyc"
-"                 \ --ignore "**/*.exe"
-"                 \ --ignore "**/*.pdf"
-"                 \ --ignore "**/*.so"
-"                 \ --ignore "**/*.png"
-"                 \ --ignore "**/*.jpeg"
-"                 \ --ignore "**/*.dll"
-"                 \ --ignore "**/*.lib"
-"                 \ --ignore "**/*.o"
-"                 \ --ignore "**/*.a"
-"                 \ --ignore "**/*.dex"
-"                 \ --ignore "**/*.class"
-"                 \ --ignore "**/*.bin"
-"                 \ --ignore "**/*.db"
-"                 \ --ignore "**/*.bmp"
-"                 \ --ignore "**/*.apk"
-"                 \ --ignore "**/*.zip"
-"                 \ --ignore "**/*.tar"
-"                 \ --ignore "**/*.tar.bz"
-"                 \ --ignore "**/*.tar.bz2"
-"                 \ --ignore "**/*.tar.gz"
-"                 \ --ignore "**/*.tar.xz"
-"                 \ --ignore "**/*.tar.lzma"
-"                 \ --ignore "**/*.rar"
-"                 \ --ignore "**/*.db"
-"                 \ --ignore "**/*.d"
-"                 \ -g ""'
-" endif
-" " Window configurations:
-" " 	position:bottom
-" " 	order (of results):top to bottom (ttb)
-" let g:ctrlp_match_window = 'bottom,order:ttb'
-" let g:ctrlp_working_path_mode = ''  " working path won't change when opening new files
-" let g:ctrlp_switch_buffer = 'Et'    " jump to opened window (if any)
-" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-" let g:ctrlp_follow_symlinks = 1
 
 Plug 'rhysd/vim-clang-format'
 Plug 'kana/vim-operator-user'
@@ -352,9 +212,6 @@ autocmd FileType c,cpp,objc,objcpp vnoremap <buffer><Leader>cf :ClangFormat<CR>
 " if you install vim-operator-user
 autocmd FileType c,cpp,objc,objcpp map <buffer><Leader>x <Plug>(operator-clang-format)
 
-Plug 'vim-scripts/a.vim'
-map <silent> <C-Tab> :A<CR>
-
 Plug 'tpope/vim-fugitive'
 set diffopt=filler,vertical
 nmap <silent> <leader>gc :Gcommit<CR>
@@ -362,23 +219,21 @@ nmap <silent> <leader>gd :Gdiff<CR>
 nmap <silent> <leader>gp :Git push<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 
-Plug 'terryma/vim-smooth-scroll'
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 1)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 1)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 5, 1)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 5, 1)<CR>
+" Plug 'terryma/vim-smooth-scroll'
+" noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 1)<CR>
+" noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 1)<CR>
+" noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 5, 1)<CR>
+" noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 5, 1)<CR>
 
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'hewes/unite-gtags'
-" Plug 'Shougo/vimshell.vim'
 " Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/unite-outline'
 
 Plug 'c0nk/vim-gn'
 Plug 'cohama/lexima.vim'
-Plug 'cream-showinvisibles'
 Plug 'embear/vim-foldsearch'
 Plug 'ferranpm/vim-isolate'
 Plug 'flazz/vim-colorschemes'
@@ -392,6 +247,8 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/AnsiEsc.vim'
+Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/cream-showinvisibles'
 Plug 'wellle/visual-split.vim'
 
 call plug#end()
@@ -482,8 +339,27 @@ function! s:unite_settings()
     imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
 
+" """"""""""""""""""""""""""""""""""""""""""""""""
+" Better key bindings for UltiSnipsExpandTrigger
+" """"""""""""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsEditSplit="context"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+let g:lexima_no_default_rules = 1
+call lexima#set_default_rules()
+call lexima#insmode#map_hook('before', '<CR>', '')
+
+let g:UltiSnipsExpandTrigger = "<nop>"
+let g:ulti_expand_or_jump_res = 0
+function! UltiSnipsExpandSnippetOrCR()
+  let snippet = UltiSnips#ExpandSnippetOrJump()
+  return g:ulti_expand_or_jump_res > 0 ? snippet : "\<CR>"
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnipsExpandSnippetOrCR()<CR>" : "<CR>"
+
 " Search in project
-nnoremap <leader>* :Ack! -w <c-r>=expand("<cword>")<cr>
+nnoremap <leader>* :Ack! -w <c-r>=fnameescape(expand("<cword>"))<cr>
 
 set exrc                          " enable per-directory .vimrc files
 set secure                        " disable unsafe commands in local .vimrc files
