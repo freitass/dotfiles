@@ -1,3 +1,3 @@
 require('user.plugins')
-require('user.settings')
+require('user.options')
 require('user.keymap')
